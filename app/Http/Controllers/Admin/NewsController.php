@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 use App\News;
 
 class NewsController extends Controller
@@ -21,6 +20,8 @@ class NewsController extends Controller
         $this->validate($request, News::$rules);
         
         $news = new News;
+        
+        // formで入力された値を取得する
         $form = $request->all();
         
         // フォームからの画像を保存して、$news->image_pathに画像のパスを保存する
@@ -44,5 +45,18 @@ class NewsController extends Controller
         // admin/news/createにリダイレクトする
         return redirect('admin/news/create');
     }
+    
+    public function index(Request $request)
+  {
+      $cond_title = $request->cond_title;
+      if ($cond_title != '') {
+          // 検索されたら検索結果を取得する
+          $posts = News::where('title', $cond_title)->get();
+      } else {
+          // それ以外はすべてのニュースを取得する
+          $posts = News::all();
+      }
+      return view('admin.news.index', ['posts' => $posts, 'cond_title' => $cond_title]);
+  }
     
 }
