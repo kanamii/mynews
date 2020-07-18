@@ -22,6 +22,8 @@ class ProfileController extends Controller
         $profiles = new Profile;
         $form = $request->all();
         
+        unset($form['_token']);
+        
         // データベースに保存する
         $profiles->fill($form);
         $profiles->save();
@@ -50,6 +52,8 @@ class ProfileController extends Controller
         
         // フォームデータを格納する
         $profile_form = $request->all();
+        
+        unset($form['_token']);
         
         // 該当するデータを上書きして保存する
         $profiles->fill($profile_form)->save();
