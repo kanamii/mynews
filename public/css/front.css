@@ -51,3 +51,7 @@ body {
   width: 250px;
 }
 
+.intro {
+  white-space: pre-wrap;
+}
+

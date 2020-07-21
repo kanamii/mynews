@@ -60,7 +60,7 @@ class ProfileController extends Controller
         // 該当するデータを上書きして保存する
         $profiles->fill($profile_form)->save();
         
-        // 更新履歴
+        // 更新履歴　この$historyはprofile_formにと関連付けされる？
         $history = new ProfileHistory;
         $history->profile_id = $profiles->id;
         $history->edited_at = Carbon::now();

@@ -29,7 +29,7 @@
                     <div class="form-group row">
                         <div class="col-md-2">自己紹介欄</div>
                         <div class="col-md-10">
-                            <div>{{ $new_profile->introduction }}</div>
+                            <p class="intro">{{ $new_profile->introduction }}</p>
                         </div>
                     </div>
                 </div>
