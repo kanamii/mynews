@@ -27,13 +27,15 @@ class NewsController extends Controller
         // formで入力された値を取得する
         $form = $request->all();
         
+        $form['image'] = $request->file('image');
+        
         // フォームからの画像を保存して、$news->image_pathに画像のパスを保存する
         if (isset($form['image'])) {
-            $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
-            $news->image_path = Storage::disk('s3')->url($path);
-        } else {
-            $news->image_path = null;
-        }
+        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+        $news->image_path = Storage::disk('s3')->url($path);
+      } else {
+          $news->image_path = null;
+      }
         
         // フォームから送信されてきた_tokenを削除する
         unset($form['_token']);
@@ -82,7 +84,7 @@ class NewsController extends Controller
       $news_form = $request->all();
       // 画像のパスを保存する
       if (isset($news_form['image'])) {
-          $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+          $path = Storage::disk('s3')->putFile('/', $news_form['image'],'public');
           $news->image_path = Storage::disk('s3')->url($path);
           unset($news_form['image']);
       } elseif (isset($request->remove)) {
