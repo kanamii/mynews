@@ -14,7 +14,6 @@
                             <div class="caption mx-auto">
                                 <div class="image">
                                     @if ($headline->image_path)
-                                        // /storage/image/画像のファイル名のURLを生成する
                                         <img src="{{ $headline->image_path }}">
                                     @endif
                                 </div>
